@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Client Y</title>
+</head>
+<body>
+  <h1>Welcome to Client Y</h1>
+  <p id='message'></p>
+  <button id='get'>Get Data</button>
+  <button id='post'>Post Data</button>
+  <button id='delete'>Delete Data</button>
+  <button id='put'>Put Data</button>
+  <script>
+    fetch('http://localhost:3000/client-y')
+      .then(response => response.json())
+      .then(data => document.getElementById('message').textContent = data.message)
+      .catch(error => document.getElementById('message').textContent = error);
+
+    document.getElementById('get').addEventListener('click', function() {
+      fetch('http://localhost:3000/client-y', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': '1234567890'
+        },
+        
+      })
+      .then(response => response.json())
+      .then(data => document.getElementById('message').textContent = JSON.stringify(data.message))
+      .catch(error => document.getElementById('message').textContent = error);
+    });
+
+    document.getElementById('post').addEventListener('click', function() {
+      fetch('http://localhost:3000/client-y', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': '1234567890'
+        },
+        body: JSON.stringify({data: 'Ini Ceritanya Mau Nge POST'})
+      })
+      .then(response => response.json())
+      .then(data => document.getElementById('message').textContent = JSON.stringify(data.message))
+      .catch(error => document.getElementById('message').textContent = error);
+    });
+
+    document.getElementById('delete').addEventListener('click', function() {
+      fetch('http://localhost:3000/client-y', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': '1234567890'
+        },
+        body: JSON.stringify({data: 'Kalo ini ceritanya mau DELETE'})
+      })
+      .then(response => response.json())
+      .then(data => document.getElementById('message').textContent = JSON.stringify(data.message))
+      .catch(error => document.getElementById('message').textContent = error);
+    });
+
+    document.getElementById('put').addEventListener('click', function() {
+      fetch('http://localhost:3000/client-y', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-KEY': '1234567890'
+        },
+        body: JSON.stringify({data: 'Nah yang ini PUT'})
+      })
+      .then(response => response.json())
+      .then(data => document.getElementById('message').textContent = JSON.stringify(data.message))
+      .catch(error => document.getElementById('message').textContent = error);
+    });
+  </script>
+</body>
+</html>
